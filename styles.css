@@ -1,692 +1,417 @@
-:root{--ink:#392B58;--deep:#393A10;--white:#FFFFFF;--sage:#F2F3AE;--sage2:#A4B0F5;--line:#D9D9C8;--muted:#466995;--periwinkle:#A4B0F5;--blue:#466995;--olive:#393A10;--lemon:#F2F3AE;--purple:#392B58}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--white);color:var(--ink);font-family:"Nunito",sans-serif}a{color:inherit;text-decoration:none}header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}nav,main,footer{max-width:1180px;margin:auto}nav{padding:19px 28px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:-.4px}.nav-links{display:flex;gap:22px}.nav-links a{font-weight:700}.hero{padding:40px 28px 90px}.eyebrow,.sectionhead p{font-size:12px;font-weight:900;letter-spacing:2px}.hero h1{font-size:clamp(56px,10vw,122px);line-height:.9;letter-spacing:-3px;font-weight:900;margin:22px 0 35px;max-width:1070px}.hero h1 span{color:var(--blue)}.intro{font-size:clamp(20px,3vw,29px);line-height:1.4;max-width:780px}.button{display:inline-block;margin-top:24px;background:var(--ink);color:var(--white);padding:15px 22px;border-radius:100px;font-weight:800;transition:.2s}.button:hover{background:var(--deep);transform:translateY(-2px)}section:not(.hero){padding:80px 28px;border-top:1px solid var(--line)}.sectionhead h2,.writing>h2,.about h2,.contact h2{font-size:clamp(38px,6vw,70px);line-height:1;letter-spacing:-2px;font-weight:800;margin:10px 0 35px}.section-intro{max-width:700px;font-size:20px;line-height:1.5;margin-bottom:35px}.articles-grid,.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.article-card{min-height:270px;padding:30px;border:1px solid var(--line);border-radius:20px;background:var(--white);display:flex;flex-direction:column;transition:.25s}.article-card:hover{background:var(--lemon);border-color:var(--ink);transform:translateY(-4px)}.article-card span,.video-info span,.showcase-label{font-size:11px;letter-spacing:1.5px;font-weight:900}.article-card h3{font-size:27px;line-height:1.15;margin:14px 0;letter-spacing:-.7px}.article-card p{color:var(--muted);margin-top:auto;margin-bottom:18px}.article-card strong,.video-info strong{font-size:14px}.selected-photography{background:var(--lemon)}.photography-work{background:var(--white)}.photo-project-copy{max-width:800px;margin-bottom:28px}.photo-project-copy h3{font-size:clamp(30px,4vw,45px);letter-spacing:-1.2px;margin:10px 0}.photo-project-copy p{font-size:18px;line-height:1.55;color:var(--muted)}.canva-embed{position:relative;width:100%;height:0;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--white);box-shadow:0 8px 24px rgba(57,43,88,.10)}.canva-embed iframe{position:absolute;width:100%;height:100%;top:0;left:0;border:0;padding:0;margin:0}.canva-desktop{padding-top:56.25%}.canva-mobile{padding-top:177.7778%}.sapl-showcases{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:35px;align-items:start}.sapl-showcase{min-width:0}.showcase-label{margin:0 0 12px}.video-work{background:var(--sage2)}.video-card{overflow:hidden;border-radius:20px;background:var(--white);border:1px solid var(--line);transition:.25s}.video-card:hover{transform:translateY(-4px);border-color:var(--ink)}.video-preview{height:350px;background:linear-gradient(135deg,var(--purple),var(--blue));display:grid;place-items:center}.play-button{height:78px;width:78px;border-radius:50%;background:var(--white);color:var(--ink);display:grid;place-items:center;font-size:28px;padding-left:5px;transition:.2s}.video-card:hover .play-button{transform:scale(1.08)}.video-info{padding:26px}.video-info h3{font-size:28px;margin:10px 0}.video-info p{line-height:1.55;color:var(--muted)}.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px}.about-copy p{font-size:19px;line-height:1.65;margin-top:0;margin-bottom:19px}.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}.skills span{padding:9px 13px;background:var(--lemon);color:var(--ink);border-radius:30px;font-size:13px;font-weight:700}.contact{background:var(--purple);color:var(--white);border-radius:22px;margin:40px 28px 70px}.contact p:not(.eyebrow){font-size:20px;line-height:1.5;max-width:700px}.contact .button{background:var(--lemon);color:var(--ink)}.contact .button:hover{background:var(--periwinkle)}footer{padding:25px 28px 45px;display:flex;justify-content:space-between;font-size:12px;font-weight:700}@media(max-width:700px){nav{align-items:flex-start;gap:14px;flex-direction:column}.nav-links{width:100%;gap:14px;overflow-x:auto;padding-bottom:3px}.hero{padding-top:40px}.hero h1{letter-spacing:-2px}.articles-grid,.video-grid,.about,.sapl-showcases{grid-template-columns:1fr}.about{gap:20px}.video-preview{height:280px}.contact{margin-left:14px;margin-right:14px}footer{gap:12px;flex-direction:column}} CSS
-
-Looking closely at your HTML snippet, there is a syntax typo right at the start of your script tag:
-
-```html
-<script>
- <canvas id="sparkle-canvas"></canvas>  <!-- <-- Accidentally pasted inside script tags -->
-
-<script>
-
-```
-
-Because that stray `<canvas>` tag was left dangling inside an open `<script>` block, the browser's JavaScript parser broke and stopped running all your particle animation code.
-
----
-
-### The Cleaned HTML File
-
-Here is your complete, fixed HTML file with the duplicate tag and script syntax error cleaned up:
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Jillian Cung communications portfolio">
-  <title>Jillian Cung | Communications Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-<!-- Canvas background element -->
-<canvas id="sparkle-canvas"></canvas>
-
-<header>
-  <nav>
-    <a class="brand" href="#top">Jillian Cung</a>
-    <div class="nav-links">
-      <a href="#selected-photography">Photography</a>
-      <a href="#writing">Writing</a>
-      <a href="#video">Video</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-</header>
-
-<main id="top">
-  <section class="hero">
-    <p class="eyebrow">COMMUNICATIONS · STORYTELLING · ENGAGEMENT</p>
-    <h1>Clear stories.<br><span>Meaningful connections.</span></h1>
-    <p class="intro">I’m Jillian, a communications professional who brings together storytelling, strategy and creativity to create clear, engaging content that connects with people.</p>
-    <a class="button" href="#selected-photography">Explore my work ↓</a>
-  </section>
-
-  <section id="selected-photography" class="selected-photography">
-    <div class="sectionhead">
-      <p>SELECTED PHOTOGRAPHY</p>
-      <h2>Stories through a different lens.</h2>
-    </div>
-    <p class="section-intro">A selection of my photography exploring people, places and moments through visual storytelling.</p>
-    <div class="canva-embed canva-desktop">
-      <iframe loading="lazy" src="https://www.canva.com/design/DAHaok7XKPw/5kCIjFN_xj4wx5352ua9rA/view?embed" title="Selected photography by Jillian Cung" allowfullscreen allow="fullscreen"></iframe>
-    </div>
-  </section>
-
-  <section id="writing" class="writing">
-    <p class="eyebrow">WRITING</p>
-    <h2>UToday Articles</h2>
-    <div class="articles-grid">
-      <a class="article-card" href="https://ucalgary.ca/news/deepfake-content-presents-growing-cybersecurity-threat" target="_blank" rel="noopener noreferrer">
-        <span>CYBERSECURITY</span>
-        <h3>Deepfake content presents growing cybersecurity threat</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://ucalgary.ca/news/explore-heart-kidney-march" target="_blank" rel="noopener noreferrer">
-        <span>COMMUNITY</span>
-        <h3>Explore the heart of the Kidney March</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://www.ucalgary.ca/news/creating-community-care-ucalgary-updated-sexual-and-gender-based-violence-policy" target="_blank" rel="noopener noreferrer">
-        <span>CAMPUS COMMUNITY</span>
-        <h3>Creating a community of care at UCalgary: Updated sexual and gender-based violence policy</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://www.ucalgary.ca/news/heart-behind-evolution-ucalgarys-womens-resource-centre" target="_blank" rel="noopener noreferrer">
-        <span>COMMUNITY</span>
-        <h3>The heart behind the evolution of UCalgary’s Women’s Resource Centre</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://news.ucalgary.ca/news/award-honours-20-years-research-and-real-world-impact-nanotechnology" target="_blank" rel="noopener noreferrer">
-        <span>RESEARCH</span>
-        <h3>Award honours 20 years of research and real-world impact in nanotechnology</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://ucalgary.ca/news/60-ucalgary-looks-ahead-its-evolving-commitment-indigenous-spaces" target="_blank" rel="noopener noreferrer">
-        <span>INDIGENOUS ENGAGEMENT</span>
-        <h3>At 60, UCalgary looks ahead in its evolving commitment to Indigenous spaces</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-    </div>
-  </section>
-
-  <section id="photography" class="photography-work">
-    <div class="sectionhead">
-      <p>WEB PHOTOGRAPHY</p>
-      <h2>Photography in context.</h2>
-    </div>
-    <div class="photo-project">
-      <div class="photo-project-copy">
-        <h3>School of Architecture, Planning and Landscape</h3>
-        <p>Photography created for the School of Architecture, Planning and Landscape’s digital communications and web presence. The photographs were used across responsive desktop and mobile web banners.</p>
-        <strong>My role: Photography</strong>
-      </div>
-      <div class="sapl-showcases">
-        <div class="sapl-showcase">
-          <p class="showcase-label">DESKTOP</p>
-          <div class="canva-embed canva-desktop">
-            <iframe loading="lazy" src="https://www.canva.com/design/DAGkX4rvsp8/876MSLmm36yOpUwsUvBEfA/view?embed" title="SAPL desktop web banners featuring photography by Jillian Cung" allowfullscreen allow="fullscreen"></iframe>
-          </div>
-        </div>
-        <div class="sapl-showcase">
-          <p class="showcase-label">MOBILE</p>
-          <div class="canva-embed canva-mobile">
-            <iframe loading="lazy" src="https://www.canva.com/design/DAGkYNmLwys/ICZZZGeCM0O_o6ijuW1c2w/view?embed" title="SAPL mobile web banners featuring photography by Jillian Cung" allowfullscreen allow="fullscreen"></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="video" class="video-work">
-    <div class="sectionhead">
-      <p>VIDEO &amp; SOCIAL</p>
-      <h2>Stories in motion.</h2>
-    </div>
-    <p class="section-intro">Selected short-form video content created for social media and digital storytelling.</p>
-    <div class="video-grid">
-      <a class="video-card" href="https://www.instagram.com/reel/DXcnEkDDEGt/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer">
-        <div class="video-preview"><span class="play-button">▶</span></div>
-        <div class="video-info">
-          <span>INSTAGRAM REEL</span>
-          <h3>University of Calgary</h3>
-          <p>UCalgary's Faculty of Veterinary Medicine Community Care Clinic is expanding access to affordable veterinary care in Calgary. Janine Simpson and Carrie Fritz share how it’s making a difference for pets and their families.</p>
-          <strong>Watch on Instagram ↗</strong>
-        </div>
-      </a>
-      <a class="video-card" href="https://www.instagram.com/reel/DYNB8YCGtru/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer">
-        <div class="video-preview"><span class="play-button">▶</span></div>
-        <div class="video-info">
-          <span>INSTAGRAM REEL</span>
-          <h3>University of Calgary</h3>
-          <p>Hands-on learning meets community impact. UCalgary's Faculty of Veterinary Medicine Community Care Clinic gives students real-world experience while helping families access essential veterinary care.</p>
-          <strong>Watch on Instagram ↗</strong>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div>
-      <p class="eyebrow">ABOUT ME</p>
-      <h2>Creative at heart.<br>Communicator by craft.</h2>
-    </div>
-    <div class="about-copy">
-      <p>I’m Jillian, a communications professional who brings together storytelling, strategy and creativity to create clear, engaging content that connects with people.</p>
-      <p>Born and raised in rural Alberta, I grew up surrounded by all things “yeehaw.” My creative journey started in Grade 4, when a teacher complimented one of my watercolour paintings. That small moment encouraged me to keep creating and sparked a lasting love of art, design and storytelling.</p>
-      <p>After discovering photojournalism in high school, I pursued a B.A. in Communications and Media Studies at the University of Calgary. Today, I bring that creative foundation to my work in communications, combining strategic thinking, content creation and community engagement to tell stories that are accessible, meaningful and audience-focused.</p>
-      <p>When I’m not creating content, you can usually spot me in one of my many fun sweaters, from cats doing yoga to colourful mountain landscapes.</p>
-      <div class="skills">
-        <span>Strategic communications</span><span>Writing &amp; editing</span><span>Content strategy</span><span>Digital communications</span><span>Stakeholder engagement</span><span>Events</span><span>Photography · Video &amp; multimedia</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <p class="eyebrow">LET’S CONNECT</p>
-    <h2>Let’s create something meaningful.</h2>
-    <p>Interested in working together or chatting about communications, storytelling or creative projects? I’d love to connect on LinkedIn.</p>
-    <a class="button" href="https://www.linkedin.com/in/jillian-cung/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a>
-  </section>
-</main>
-
-<footer>
-  <span>© <span id="year"></span> Jillian Cung</span>
-  <span>Communications · Storytelling · Engagement</span>
-</footer>
-
-<script src="script.js"></script>
-
-<!-- Sparkle Animation Script -->
-<script>
-  const canvas = document.getElementById('sparkle-canvas');
-  const ctx = canvas.getContext('2d');
-
-  let width, height;
-  let particles = [];
-
-  // Soft Pale Yellow & Pink Palette
-  const colors = [
-    'rgba(254, 243, 199, ', // Soft Pale Yellow
-    'rgba(253, 230, 138, ', // Light Butter Yellow
-    'rgba(251, 207, 232, ', // Soft Pastel Pink
-    'rgba(244, 166, 188, '  // Gentle Rose Pink
-  ];
-
-  function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  }
-
-  window.addEventListener('resize', resize);
-  resize();
-
-  class Sparkle {
-    constructor() {
-      this.reset(true);
-    }
-
-    reset(isInitial = false) {
-      this.x = Math.random() * width;
-      this.y = isInitial ? Math.random() * height : height + Math.random() * 50;
-      this.size = Math.random() * 7 + 2.5; 
-      this.speedY = Math.random() * 0.4 + 0.15;
-      this.speedX = (Math.random() - 0.5) * 0.25;
-      
-      this.maxOpacity = Math.random() * 0.75 + 0.25;
-      this.opacity = isInitial ? Math.random() * this.maxOpacity : 0;
-      this.fadeSpeed = Math.random() * 0.006 + 0.003;
-      this.fadeIn = !isInitial;
-      
-      this.colorBase = colors[Math.floor(Math.random() * colors.length)];
-      this.isStar = Math.random() > 0.35; 
-      this.rotation = Math.random() * Math.PI;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.012;
-    }
-
-    update() {
-      this.x += this.speedX;
-      this.y -= this.speedY;
-      this.rotation += this.rotationSpeed;
-
-      if (this.fadeIn) {
-        this.opacity += this.fadeSpeed;
-        if (this.opacity >= this.maxOpacity) this.fadeIn = false;
-      } else {
-        this.opacity -= this.fadeSpeed;
-      }
-
-      if (this.opacity <= 0 || this.y < -20) {
-        this.reset(false);
-      }
-    }
-
-    draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rotation);
-      ctx.fillStyle = this.colorBase + this.opacity + ')';
-
-      if (this.isStar) {
-        ctx.beginPath();
-        for (let i = 0; i < 4; i++) {
-          ctx.rotate(Math.PI / 2);
-          ctx.lineTo(0, 0 - this.size);
-          ctx.quadraticCurveTo(0, 0, 0 + this.size / 4, 0);
-        }
-        ctx.fill();
-      } else {
-        ctx.beginPath();
-        ctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.restore();
-    }
-  }
-
-  const particleCount = Math.floor(window.innerWidth / 20);
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Sparkle());
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-</script>
-
-</body>
-</html>
-
-```
-
-### Don't forget your CSS!
-
-Make sure you also have this block at the very bottom of your **`styles.css`** so the canvas fills the viewport properly and isn't hidden behind solid background layers:
-
-```css
-/* Sparkle Canvas Background Rules */
-#sparkle-canvas {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  pointer-events: none !important;
-  z-index: 1 !important;
+:root {
+  --ink: #392B58;
+  --deep: #393A10;
+  --white: #FFFFFF;
+  --sage: #F2F3AE;
+  --sage2: #A4B0F5;
+  --line: #D9D9C8;
+  --muted: #466995;
+  --periwinkle: #A4B0F5;
+  --blue: #466995;
+  --olive: #393A10;
+  --lemon: #F2F3AE;
+  --purple: #392B58;
 }
 
-header, main, footer {
-  position: relative !important;
-  z-index: 2 !important;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
+  margin: 0;
   background: var(--white);
+  color: var(--ink);
+  font-family: "Nunito", sans-serif;
+  position: relative;
+  min-height: 100%;
 }
 
-.hero, .photography-work, .writing, .about {
-  background: transparent !important;
-}
-
-.selected-photography {
-  background: rgba(242, 243, 174, 0.85) !important;
-}
-
-.video-work {
-  background: rgba(164, 176, 245, 0.85) !important;
-}
-:root{--ink:#392B58;--deep:#393A10;--white:#FFFFFF;--sage:#F2F3AE;--sage2:#A4B0F5;--line:#D9D9C8;--muted:#466995;--periwinkle:#A4B0F5;--blue:#466995;--olive:#393A10;--lemon:#F2F3AE;--purple:#392B58}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--white);color:var(--ink);font-family:"Nunito",sans-serif}a{color:inherit;text-decoration:none}header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}nav,main,footer{max-width:1180px;margin:auto}nav{padding:19px 28px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:-.4px}.nav-links{display:flex;gap:22px}.nav-links a{font-weight:700}.hero{padding:40px 28px 90px}.eyebrow,.sectionhead p{font-size:12px;font-weight:900;letter-spacing:2px}.hero h1{font-size:clamp(56px,10vw,122px);line-height:.9;letter-spacing:-3px;font-weight:900;margin:22px 0 35px;max-width:1070px}.hero h1 span{color:var(--blue)}.intro{font-size:clamp(20px,3vw,29px);line-height:1.4;max-width:780px}.button{display:inline-block;margin-top:24px;background:var(--ink);color:var(--white);padding:15px 22px;border-radius:100px;font-weight:800;transition:.2s}.button:hover{background:var(--deep);transform:translateY(-2px)}section:not(.hero){padding:80px 28px;border-top:1px solid var(--line)}.sectionhead h2,.writing>h2,.about h2,.contact h2{font-size:clamp(38px,6vw,70px);line-height:1;letter-spacing:-2px;font-weight:800;margin:10px 0 35px}.section-intro{max-width:700px;font-size:20px;line-height:1.5;margin-bottom:35px}.articles-grid,.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.article-card{min-height:270px;padding:30px;border:1px solid var(--line);border-radius:20px;background:var(--white);display:flex;flex-direction:column;transition:.25s}.article-card:hover{background:var(--lemon);border-color:var(--ink);transform:translateY(-4px)}.article-card span,.video-info span,.showcase-label{font-size:11px;letter-spacing:1.5px;font-weight:900}.article-card h3{font-size:27px;line-height:1.15;margin:14px 0;letter-spacing:-.7px}.article-card p{color:var(--muted);margin-top:auto;margin-bottom:18px}.article-card strong,.video-info strong{font-size:14px}.selected-photography{background:var(--lemon)}.photography-work{background:var(--white)}.photo-project-copy{max-width:800px;margin-bottom:28px}.photo-project-copy h3{font-size:clamp(30px,4vw,45px);letter-spacing:-1.2px;margin:10px 0}.photo-project-copy p{font-size:18px;line-height:1.55;color:var(--muted)}.canva-embed{position:relative;width:100%;height:0;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--white);box-shadow:0 8px 24px rgba(57,43,88,.10)}.canva-embed iframe{position:absolute;width:100%;height:100%;top:0;left:0;border:0;padding:0;margin:0}.canva-desktop{padding-top:56.25%}.canva-mobile{padding-top:177.7778%}.sapl-showcases{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:35px;align-items:start}.sapl-showcase{min-width:0}.showcase-label{margin:0 0 12px}.video-work{background:var(--sage2)}.video-card{overflow:hidden;border-radius:20px;background:var(--white);border:1px solid var(--line);transition:.25s}.video-card:hover{transform:translateY(-4px);border-color:var(--ink)}.video-preview{height:350px;background:linear-gradient(135deg,var(--purple),var(--blue));display:grid;place-items:center}.play-button{height:78px;width:78px;border-radius:50%;background:var(--white);color:var(--ink);display:grid;place-items:center;font-size:28px;padding-left:5px;transition:.2s}.video-card:hover .play-button{transform:scale(1.08)}.video-info{padding:26px}.video-info h3{font-size:28px;margin:10px 0}.video-info p{line-height:1.55;color:var(--muted)}.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px}.about-copy p{font-size:19px;line-height:1.65;margin-top:0;margin-bottom:19px}.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}.skills span{padding:9px 13px;background:var(--lemon);color:var(--ink);border-radius:30px;font-size:13px;font-weight:700}.contact{background:var(--purple);color:var(--white);border-radius:22px;margin:40px 28px 70px}.contact p:not(.eyebrow){font-size:20px;line-height:1.5;max-width:700px}.contact .button{background:var(--lemon);color:var(--ink)}.contact .button:hover{background:var(--periwinkle)}footer{padding:25px 28px 45px;display:flex;justify-content:space-between;font-size:12px;font-weight:700}@media(max-width:700px){nav{align-items:flex-start;gap:14px;flex-direction:column}.nav-links{width:100%;gap:14px;overflow-x:auto;padding-bottom:3px}.hero{padding-top:40px}.hero h1{letter-spacing:-2px}.articles-grid,.video-grid,.about,.sapl-showcases{grid-template-columns:1fr}.about{gap:20px}.video-preview{height:280px}.contact{margin-left:14px;margin-right:14px}footer{gap:12px;flex-direction:column}} CSS
-
-Looking closely at your HTML snippet, there is a syntax typo right at the start of your script tag:
-
-```html
-<script>
- <canvas id="sparkle-canvas"></canvas>  <!-- <-- Accidentally pasted inside script tags -->
-
-<script>
-
-```
-
-Because that stray `<canvas>` tag was left dangling inside an open `<script>` block, the browser's JavaScript parser broke and stopped running all your particle animation code.
-
----
-
-### The Cleaned HTML File
-
-Here is your complete, fixed HTML file with the duplicate tag and script syntax error cleaned up:
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Jillian Cung communications portfolio">
-  <title>Jillian Cung | Communications Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-<!-- Canvas background element -->
-<canvas id="sparkle-canvas"></canvas>
-
-<header>
-  <nav>
-    <a class="brand" href="#top">Jillian Cung</a>
-    <div class="nav-links">
-      <a href="#selected-photography">Photography</a>
-      <a href="#writing">Writing</a>
-      <a href="#video">Video</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-</header>
-
-<main id="top">
-  <section class="hero">
-    <p class="eyebrow">COMMUNICATIONS · STORYTELLING · ENGAGEMENT</p>
-    <h1>Clear stories.<br><span>Meaningful connections.</span></h1>
-    <p class="intro">I’m Jillian, a communications professional who brings together storytelling, strategy and creativity to create clear, engaging content that connects with people.</p>
-    <a class="button" href="#selected-photography">Explore my work ↓</a>
-  </section>
-
-  <section id="selected-photography" class="selected-photography">
-    <div class="sectionhead">
-      <p>SELECTED PHOTOGRAPHY</p>
-      <h2>Stories through a different lens.</h2>
-    </div>
-    <p class="section-intro">A selection of my photography exploring people, places and moments through visual storytelling.</p>
-    <div class="canva-embed canva-desktop">
-      <iframe loading="lazy" src="https://www.canva.com/design/DAHaok7XKPw/5kCIjFN_xj4wx5352ua9rA/view?embed" title="Selected photography by Jillian Cung" allowfullscreen allow="fullscreen"></iframe>
-    </div>
-  </section>
-
-  <section id="writing" class="writing">
-    <p class="eyebrow">WRITING</p>
-    <h2>UToday Articles</h2>
-    <div class="articles-grid">
-      <a class="article-card" href="https://ucalgary.ca/news/deepfake-content-presents-growing-cybersecurity-threat" target="_blank" rel="noopener noreferrer">
-        <span>CYBERSECURITY</span>
-        <h3>Deepfake content presents growing cybersecurity threat</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://ucalgary.ca/news/explore-heart-kidney-march" target="_blank" rel="noopener noreferrer">
-        <span>COMMUNITY</span>
-        <h3>Explore the heart of the Kidney March</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://www.ucalgary.ca/news/creating-community-care-ucalgary-updated-sexual-and-gender-based-violence-policy" target="_blank" rel="noopener noreferrer">
-        <span>CAMPUS COMMUNITY</span>
-        <h3>Creating a community of care at UCalgary: Updated sexual and gender-based violence policy</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://www.ucalgary.ca/news/heart-behind-evolution-ucalgarys-womens-resource-centre" target="_blank" rel="noopener noreferrer">
-        <span>COMMUNITY</span>
-        <h3>The heart behind the evolution of UCalgary’s Women’s Resource Centre</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://news.ucalgary.ca/news/award-honours-20-years-research-and-real-world-impact-nanotechnology" target="_blank" rel="noopener noreferrer">
-        <span>RESEARCH</span>
-        <h3>Award honours 20 years of research and real-world impact in nanotechnology</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-      <a class="article-card" href="https://ucalgary.ca/news/60-ucalgary-looks-ahead-its-evolving-commitment-indigenous-spaces" target="_blank" rel="noopener noreferrer">
-        <span>INDIGENOUS ENGAGEMENT</span>
-        <h3>At 60, UCalgary looks ahead in its evolving commitment to Indigenous spaces</h3>
-        <p>UToday · University of Calgary</p>
-        <strong>Read article ↗</strong>
-      </a>
-    </div>
-  </section>
-
-  <section id="photography" class="photography-work">
-    <div class="sectionhead">
-      <p>WEB PHOTOGRAPHY</p>
-      <h2>Photography in context.</h2>
-    </div>
-    <div class="photo-project">
-      <div class="photo-project-copy">
-        <h3>School of Architecture, Planning and Landscape</h3>
-        <p>Photography created for the School of Architecture, Planning and Landscape’s digital communications and web presence. The photographs were used across responsive desktop and mobile web banners.</p>
-        <strong>My role: Photography</strong>
-      </div>
-      <div class="sapl-showcases">
-        <div class="sapl-showcase">
-          <p class="showcase-label">DESKTOP</p>
-          <div class="canva-embed canva-desktop">
-            <iframe loading="lazy" src="https://www.canva.com/design/DAGkX4rvsp8/876MSLmm36yOpUwsUvBEfA/view?embed" title="SAPL desktop web banners featuring photography by Jillian Cung" allowfullscreen allow="fullscreen"></iframe>
-          </div>
-        </div>
-        <div class="sapl-showcase">
-          <p class="showcase-label">MOBILE</p>
-          <div class="canva-embed canva-mobile">
-            <iframe loading="lazy" src="https://www.canva.com/design/DAGkYNmLwys/ICZZZGeCM0O_o6ijuW1c2w/view?embed" title="SAPL mobile web banners featuring photography by Jillian Cung" allowfullscreen allow="fullscreen"></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="video" class="video-work">
-    <div class="sectionhead">
-      <p>VIDEO &amp; SOCIAL</p>
-      <h2>Stories in motion.</h2>
-    </div>
-    <p class="section-intro">Selected short-form video content created for social media and digital storytelling.</p>
-    <div class="video-grid">
-      <a class="video-card" href="https://www.instagram.com/reel/DXcnEkDDEGt/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer">
-        <div class="video-preview"><span class="play-button">▶</span></div>
-        <div class="video-info">
-          <span>INSTAGRAM REEL</span>
-          <h3>University of Calgary</h3>
-          <p>UCalgary's Faculty of Veterinary Medicine Community Care Clinic is expanding access to affordable veterinary care in Calgary. Janine Simpson and Carrie Fritz share how it’s making a difference for pets and their families.</p>
-          <strong>Watch on Instagram ↗</strong>
-        </div>
-      </a>
-      <a class="video-card" href="https://www.instagram.com/reel/DYNB8YCGtru/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer">
-        <div class="video-preview"><span class="play-button">▶</span></div>
-        <div class="video-info">
-          <span>INSTAGRAM REEL</span>
-          <h3>University of Calgary</h3>
-          <p>Hands-on learning meets community impact. UCalgary's Faculty of Veterinary Medicine Community Care Clinic gives students real-world experience while helping families access essential veterinary care.</p>
-          <strong>Watch on Instagram ↗</strong>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <div>
-      <p class="eyebrow">ABOUT ME</p>
-      <h2>Creative at heart.<br>Communicator by craft.</h2>
-    </div>
-    <div class="about-copy">
-      <p>I’m Jillian, a communications professional who brings together storytelling, strategy and creativity to create clear, engaging content that connects with people.</p>
-      <p>Born and raised in rural Alberta, I grew up surrounded by all things “yeehaw.” My creative journey started in Grade 4, when a teacher complimented one of my watercolour paintings. That small moment encouraged me to keep creating and sparked a lasting love of art, design and storytelling.</p>
-      <p>After discovering photojournalism in high school, I pursued a B.A. in Communications and Media Studies at the University of Calgary. Today, I bring that creative foundation to my work in communications, combining strategic thinking, content creation and community engagement to tell stories that are accessible, meaningful and audience-focused.</p>
-      <p>When I’m not creating content, you can usually spot me in one of my many fun sweaters, from cats doing yoga to colourful mountain landscapes.</p>
-      <div class="skills">
-        <span>Strategic communications</span><span>Writing &amp; editing</span><span>Content strategy</span><span>Digital communications</span><span>Stakeholder engagement</span><span>Events</span><span>Photography · Video &amp; multimedia</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <p class="eyebrow">LET’S CONNECT</p>
-    <h2>Let’s create something meaningful.</h2>
-    <p>Interested in working together or chatting about communications, storytelling or creative projects? I’d love to connect on LinkedIn.</p>
-    <a class="button" href="https://www.linkedin.com/in/jillian-cung/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a>
-  </section>
-</main>
-
-<footer>
-  <span>© <span id="year"></span> Jillian Cung</span>
-  <span>Communications · Storytelling · Engagement</span>
-</footer>
-
-<script src="script.js"></script>
-
-<!-- Sparkle Animation Script -->
-<script>
-  const canvas = document.getElementById('sparkle-canvas');
-  const ctx = canvas.getContext('2d');
-
-  let width, height;
-  let particles = [];
-
-  // Soft Pale Yellow & Pink Palette
-  const colors = [
-    'rgba(254, 243, 199, ', // Soft Pale Yellow
-    'rgba(253, 230, 138, ', // Light Butter Yellow
-    'rgba(251, 207, 232, ', // Soft Pastel Pink
-    'rgba(244, 166, 188, '  // Gentle Rose Pink
-  ];
-
-  function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  }
-
-  window.addEventListener('resize', resize);
-  resize();
-
-  class Sparkle {
-    constructor() {
-      this.reset(true);
-    }
-
-    reset(isInitial = false) {
-      this.x = Math.random() * width;
-      this.y = isInitial ? Math.random() * height : height + Math.random() * 50;
-      this.size = Math.random() * 7 + 2.5; 
-      this.speedY = Math.random() * 0.4 + 0.15;
-      this.speedX = (Math.random() - 0.5) * 0.25;
-      
-      this.maxOpacity = Math.random() * 0.75 + 0.25;
-      this.opacity = isInitial ? Math.random() * this.maxOpacity : 0;
-      this.fadeSpeed = Math.random() * 0.006 + 0.003;
-      this.fadeIn = !isInitial;
-      
-      this.colorBase = colors[Math.floor(Math.random() * colors.length)];
-      this.isStar = Math.random() > 0.35; 
-      this.rotation = Math.random() * Math.PI;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.012;
-    }
-
-    update() {
-      this.x += this.speedX;
-      this.y -= this.speedY;
-      this.rotation += this.rotationSpeed;
-
-      if (this.fadeIn) {
-        this.opacity += this.fadeSpeed;
-        if (this.opacity >= this.maxOpacity) this.fadeIn = false;
-      } else {
-        this.opacity -= this.fadeSpeed;
-      }
-
-      if (this.opacity <= 0 || this.y < -20) {
-        this.reset(false);
-      }
-    }
-
-    draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rotation);
-      ctx.fillStyle = this.colorBase + this.opacity + ')';
-
-      if (this.isStar) {
-        ctx.beginPath();
-        for (let i = 0; i < 4; i++) {
-          ctx.rotate(Math.PI / 2);
-          ctx.lineTo(0, 0 - this.size);
-          ctx.quadraticCurveTo(0, 0, 0 + this.size / 4, 0);
-        }
-        ctx.fill();
-      } else {
-        ctx.beginPath();
-        ctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.restore();
-    }
-  }
-
-  const particleCount = Math.floor(window.innerWidth / 20);
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Sparkle());
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    particles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-</script>
-
-</body>
-</html>
-
-```
-
-### Don't forget your CSS!
-
-Make sure you also have this block at the very bottom of your **`styles.css`** so the canvas fills the viewport properly and isn't hidden behind solid background layers:
-
-```css
-/* Sparkle Canvas Background Rules */
+/* --- Sparkle Canvas Background Rules --- */
 #sparkle-canvas {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  pointer-events: none !important;
-  z-index: 1 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;        /* Fixes the inline vertical white gap at the bottom */
+  pointer-events: none;  /* Allows clicks to pass through to content */
+  z-index: 0;            /* Sits behind your content layer */
 }
 
+/* Ensure your main layout layers stay safely above the background canvas */
 header, main, footer {
-  position: relative !important;
-  z-index: 2 !important;
+  max-width: 1180px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
 }
 
-body {
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, .94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+nav {
+  padding: 19px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -.4px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
+
+.nav-links a {
+  font-weight: 700;
+}
+
+.hero {
+  padding: 40px 28px 90px;
+}
+
+.eyebrow, .sectionhead p {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: clamp(56px, 10vw, 122px);
+  line-height: .9;
+  letter-spacing: -3px;
+  font-weight: 900;
+  margin: 22px 0 35px;
+  max-width: 1070px;
+}
+
+.hero h1 span {
+  color: var(--blue);
+}
+
+.intro {
+  font-size: clamp(20px, 3vw, 29px);
+  line-height: 1.4;
+  max-width: 780px;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 24px;
+  background: var(--ink);
+  color: var(--white);
+  padding: 15px 22px;
+  border-radius: 100px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.button:hover {
+  background: var(--deep);
+  transform: translateY(-2px);
+}
+
+section:not(.hero) {
+  padding: 80px 28px;
+  border-top: 1px solid var(--line);
+}
+
+.sectionhead h2, .writing > h2, .about h2, .contact h2 {
+  font-size: clamp(38px, 6vw, 70px);
+  line-height: 1;
+  letter-spacing: -2px;
+  font-weight: 800;
+  margin: 10px 0 35px;
+}
+
+.section-intro {
+  max-width: 700px;
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 35px;
+}
+
+.articles-grid, .video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.article-card {
+  min-height: 270px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
   background: var(--white);
+  display: flex;
+  flex-direction: column;
+  transition: .25s;
 }
 
-.hero, .photography-work, .writing, .about {
-  background: transparent !important;
+.article-card:hover {
+  background: var(--lemon);
+  border-color: var(--ink);
+  transform: translateY(-4px);
+}
+
+.article-card span, .video-info span, .showcase-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  font-weight: 900;
+}
+
+.article-card h3 {
+  font-size: 27px;
+  line-height: 1.15;
+  margin: 14px 0;
+  letter-spacing: -.7px;
+}
+
+.article-card p {
+  color: var(--muted);
+  margin-top: auto;
+  margin-bottom: 18px;
+}
+
+.article-card strong, .video-info strong {
+  font-size: 14px;
 }
 
 .selected-photography {
-  background: rgba(242, 243, 174, 0.85) !important;
+  background: rgba(242, 243, 174, 0.85);
+}
+
+.photography-work {
+  background: var(--white);
+}
+
+.photo-project-copy {
+  max-width: 800px;
+  margin-bottom: 28px;
+}
+
+.photo-project-copy h3 {
+  font-size: clamp(30px, 4vw, 45px);
+  letter-spacing: -1.2px;
+  margin: 10px 0;
+}
+
+.photo-project-copy p {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.canva-embed {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 8px 24px rgba(57, 43, 88, .10);
+}
+
+.canva-embed iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.canva-desktop {
+  padding-top: 56.25%;
+}
+
+.canva-mobile {
+  padding-top: 177.7778%;
+}
+
+.sapl-showcases {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 35px;
+  align-items: start;
+}
+
+.sapl-showcase {
+  min-width: 0;
+}
+
+.showcase-label {
+  margin: 0 0 12px;
 }
 
 .video-work {
-  background: rgba(164, 176, 245, 0.85) !important;
+  background: rgba(164, 176, 245, 0.85);
+}
+
+.video-card {
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  transition: .25s;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ink);
+}
+
+.video-preview {
+  height: 350px;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  display: grid;
+  place-items: center;
+}
+
+.play-button {
+  height: 78px;
+  width: 78px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  padding-left: 5px;
+  transition: .2s;
+}
+
+.video-card:hover .play-button {
+  transform: scale(1.08);
+}
+
+.video-info {
+  padding: 26px;
+}
+
+.video-info h3 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.video-info p {
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.about {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 80px;
+}
+
+.about-copy p {
+  font-size: 19px;
+  line-height: 1.65;
+  margin-top: 0;
+  margin-bottom: 19px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.skills span {
+  padding: 9px 13px;
+  background: var(--lemon);
+  color: var(--ink);
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.contact {
+  background: var(--purple);
+  color: var(--white);
+  border-radius: 22px;
+  margin: 40px 28px 70px;
+}
+
+.contact p:not(.eyebrow) {
+  font-size: 20px;
+  line-height: 1.5;
+  max-width: 700px;
+}
+
+.contact .button {
+  background: var(--lemon);
+  color: var(--ink);
+}
+
+.contact .button:hover {
+  background: var(--periwinkle);
+}
+
+footer {
+  padding: 25px 28px 45px;
+  display: flex;
+  justify-content:space-between;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media(max-width: 700px) {
+  nav {
+    align-items: flex-start;
+    gap: 14px;
+    flex-direction: column;
+  }
+  .nav-links {
+    width: 100%;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 3px;
+  }
+  .hero {
+    padding-top: 40px;
+  }
+  .hero h1 {
+    letter-spacing: -2px;
+  }
+  .articles-grid, .video-grid, .about, .sapl-showcases {
+    grid-template-columns: 1fr;
+  }
+  .about {
+    gap: 20px;
+  }
+  .video-preview {
+    height: 280px;
+  }
+  .contact {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+  footer {
+    gap: 12px;
+    flex-direction: column;
+  }
 }
