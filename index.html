@@ -279,7 +279,113 @@
   }
 
   animate();
-</script>
 
+<!-- Sparkle Animation Script -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const canvas = document.getElementById('sparkle-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  let particles = [];
+
+  // Brightened, high-visibility color palette
+  const colors = [
+    'rgba(255, 223, 100, ', // Warm Gold Sparkle
+    'rgba(255, 240, 150, ', // Bright Yellow Sparkle
+    'rgba(240, 160, 220, ', // Vivid Pastel Pink
+    'rgba(164, 176, 245, '  // Vibrant Periwinkle
+  ];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Sparkle {
+    constructor() {
+      this.reset(true);
+    }
+
+    reset(isInitial = false) {
+      this.x = Math.random() * width;
+      this.y = isInitial ? Math.random() * height : height + Math.random() * 50;
+      this.size = Math.random() * 9 + 4.5; // Slightly larger for better visibility
+      this.speedY = Math.random() * 0.45 + 0.2;
+      this.speedX = (Math.random() - 0.5) * 0.3;
+      
+      // Increased max opacity range (between 0.70 and 1.0 full visibility)
+      this.maxOpacity = Math.random() * 0.3 + 0.7; 
+      this.opacity = isInitial ? Math.random() * this.maxOpacity : 0;
+      this.fadeSpeed = Math.random() * 0.008 + 0.004;
+      this.fadeIn = !isInitial;
+      
+      this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+      this.isStar = Math.random() > 0.3; 
+      this.rotation = Math.random() * Math.PI;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.015;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y -= this.speedY;
+      this.rotation += this.rotationSpeed;
+
+      if (this.fadeIn) {
+        this.opacity += this.fadeSpeed;
+        if (this.opacity >= this.maxOpacity) this.fadeIn = false;
+      } else {
+        this.opacity -= this.fadeSpeed;
+      }
+
+      if (this.opacity <= 0 || this.y < -20) {
+        this.reset(false);
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.fillStyle = this.colorBase + this.opacity + ')';
+
+      if (this.isStar) {
+        ctx.beginPath();
+        for (let i = 0; i < 4; i++) {
+          ctx.rotate(Math.PI / 2);
+          ctx.lineTo(0, 0 - this.size);
+          ctx.quadraticCurveTo(0, 0, 0 + this.size / 3.5, 0);
+        }
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size / 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  const particleCount = Math.floor(window.innerWidth / 15); // Increased particle density
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Sparkle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
 </body>
 </html>
