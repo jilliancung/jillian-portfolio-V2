@@ -281,6 +281,7 @@
   animate();
 
 <!-- Sparkle Animation Script -->
+<!-- High-Visibility Sparkle Animation Script -->
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -290,12 +291,12 @@
   let width, height;
   let particles = [];
 
-  // Brightened, high-visibility color palette
+  // High-contrast, vibrant color palette (Vivid Gold, Warm Coral, Deep Purple-Pink, Periwinkle)
   const colors = [
-    'rgba(255, 223, 100, ', // Warm Gold Sparkle
-    'rgba(255, 240, 150, ', // Bright Yellow Sparkle
-    'rgba(240, 160, 220, ', // Vivid Pastel Pink
-    'rgba(164, 176, 245, '  // Vibrant Periwinkle
+    'rgba(255, 190, 11, ',  // Bright Golden Yellow
+    'rgba(255, 120, 150, ', // Rich Coral Pink
+    'rgba(180, 100, 240, ', // Vibrant Violet
+    'rgba(90, 110, 240, '   // Bold Blue-Periwinkle
   ];
 
   function resize() {
@@ -314,20 +315,22 @@
     reset(isInitial = false) {
       this.x = Math.random() * width;
       this.y = isInitial ? Math.random() * height : height + Math.random() * 50;
-      this.size = Math.random() * 9 + 4.5; // Slightly larger for better visibility
-      this.speedY = Math.random() * 0.45 + 0.2;
-      this.speedX = (Math.random() - 0.5) * 0.3;
       
-      // Increased max opacity range (between 0.70 and 1.0 full visibility)
-      this.maxOpacity = Math.random() * 0.3 + 0.7; 
+      // Much larger sizes (between 8px and 24px)
+      this.size = Math.random() * 16 + 8; 
+      this.speedY = Math.random() * 0.6 + 0.25;
+      this.speedX = (Math.random() - 0.5) * 0.4;
+      
+      // Full opacity (0.85 to 1.0)
+      this.maxOpacity = Math.random() * 0.15 + 0.85; 
       this.opacity = isInitial ? Math.random() * this.maxOpacity : 0;
       this.fadeSpeed = Math.random() * 0.008 + 0.004;
       this.fadeIn = !isInitial;
       
       this.colorBase = colors[Math.floor(Math.random() * colors.length)];
-      this.isStar = Math.random() > 0.3; 
+      this.isStar = Math.random() > 0.25; // 75% 4-point stars, 25% glowing dots
       this.rotation = Math.random() * Math.PI;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.015;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.02;
     }
 
     update() {
@@ -342,7 +345,7 @@
         this.opacity -= this.fadeSpeed;
       }
 
-      if (this.opacity <= 0 || this.y < -20) {
+      if (this.opacity <= 0 || this.y < -30) {
         this.reset(false);
       }
     }
@@ -351,19 +354,26 @@
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(this.rotation);
+
+      // Add a luminous outer glow to each sparkle
+      ctx.shadowColor = this.colorBase + '0.8)';
+      ctx.shadowBlur = 12;
+
       ctx.fillStyle = this.colorBase + this.opacity + ')';
 
       if (this.isStar) {
+        // Crisp 4-point sparkle star
         ctx.beginPath();
         for (let i = 0; i < 4; i++) {
           ctx.rotate(Math.PI / 2);
           ctx.lineTo(0, 0 - this.size);
-          ctx.quadraticCurveTo(0, 0, 0 + this.size / 3.5, 0);
+          ctx.quadraticCurveTo(0, 0, 0 + this.size / 3, 0);
         }
         ctx.fill();
       } else {
+        // Glowing dot particle
         ctx.beginPath();
-        ctx.arc(0, 0, this.size / 2.2, 0, Math.PI * 2);
+        ctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -371,7 +381,8 @@
     }
   }
 
-  const particleCount = Math.floor(window.innerWidth / 15); // Increased particle density
+  // Doubled particle density (screen width / 8)
+  const particleCount = Math.floor(window.innerWidth / 8);
   for (let i = 0; i < particleCount; i++) {
     particles.push(new Sparkle());
   }
