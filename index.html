@@ -11,6 +11,20 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<!-- Add this canvas right after your <body> tag -->
+<canvas id="sparkle-canvas"></canvas>
+
+<style>
+  #sparkle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Allows clicks to pass through to buttons/links */
+    z-index: -1; /* Keeps it strictly in the background */
+  }
+</style>
 <header><nav><a class="brand" href="#top">Jillian Cung</a><div class="nav-links"><a href="#selected-photography">Photography</a><a href="#writing">Writing</a><a href="#video">Video</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav></header>
 <main id="top">
   <section class="hero"><p class="eyebrow">COMMUNICATIONS · STORYTELLING · ENGAGEMENT</p><h1>Clear stories.<br><span>Meaningful connections.</span></h1><p class="intro">I’m Jillian, a communications professional who brings together storytelling, strategy and creativity to create clear, engaging content that connects with people.</p><a class="button" href="#selected-photography">Explore my work ↓</a></section>
@@ -40,4 +54,115 @@
 </section>
 </main>
 <footer><span>© <span id="year"></span> Jillian Cung</span><span>Communications · Storytelling · Engagement</span></footer><script src="script.js"></script>
+<script>
+  const canvas = document.getElementById('sparkle-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  let particles = [];
+
+  // Whimsical color palette (gold, peach, sage, lavender)
+  const colors = [
+    'rgba(244, 211, 142, ', // Warm Gold
+    'rgba(235, 178, 154, ', // Soft Terracotta/Peach
+    'rgba(182, 199, 170, ', // Gentle Sage
+    'rgba(215, 196, 224, '  // Soft Lavender
+  ];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Sparkle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + Math.random() * 100; // Start below screen
+      this.size = Math.random() * 6 + 2; // Sparkle radius/length
+      this.speedY = Math.random() * 0.4 + 0.1; // Slow upward float
+      this.speedX = (Math.random() - 0.5) * 0.2; // Gentle lateral drift
+      this.opacity = 0;
+      this.maxOpacity = Math.random() * 0.7 + 0.2;
+      this.fadeSpeed = Math.random() * 0.008 + 0.003;
+      this.fadeIn = true;
+      this.colorBase = colors[Math.floor(Math.random() * colors.length)];
+      this.isStar = Math.random() > 0.4; // 60% 4-point stars, 40% glowing dots
+      this.rotation = Math.random() * Math.PI;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.01;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y -= this.speedY;
+      this.rotation += this.rotationSpeed;
+
+      // Handle fade in and out
+      if (this.fadeIn) {
+        this.opacity += this.fadeSpeed;
+        if (this.opacity >= this.maxOpacity) this.fadeIn = false;
+      } else {
+        this.opacity -= this.fadeSpeed;
+      }
+
+      // Reset when faded out or off screen
+      if (this.opacity <= 0 || this.y < -20) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.fillStyle = this.colorBase + this.opacity + ')';
+
+      if (this.isStar) {
+        // Draw 4-pointed star
+        ctx.beginPath();
+        for (let i = 0; i < 4; i++) {
+          ctx.rotate(Math.PI / 2);
+          ctx.lineTo(0, 0 - this.size);
+          ctx.quadraticCurveTo(0, 0, 0 + this.size / 4, 0);
+        }
+        ctx.fill();
+      } else {
+        // Draw glowing circular dust dot
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  // Populate particles density based on screen width
+  const particleCount = Math.floor(window.innerWidth / 25);
+  for (let i = 0; i < particleCount; i++) {
+    const p = new Sparkle();
+    // Stagger initial starting Y position across the screen
+    p.y = Math.random() * height;
+    particles.push(p);
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
 </body></html>
