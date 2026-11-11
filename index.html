@@ -55,18 +55,21 @@
 </main>
 <footer><span>© <span id="year"></span> Jillian Cung</span><span>Communications · Storytelling · Engagement</span></footer><script src="script.js"></script>
 <script>
+ <canvas id="sparkle-canvas"></canvas>
+
+<script>
   const canvas = document.getElementById('sparkle-canvas');
   const ctx = canvas.getContext('2d');
 
   let width, height;
   let particles = [];
 
-  // Whimsical color palette (gold, peach, sage, lavender)
+  // Soft Pale Yellow & Pink Palette
   const colors = [
-    'rgba(244, 211, 142, ', // Warm Gold
-    'rgba(235, 178, 154, ', // Soft Terracotta/Peach
-    'rgba(182, 199, 170, ', // Gentle Sage
-    'rgba(215, 196, 224, '  // Soft Lavender
+    'rgba(254, 243, 199, ', // Soft Pale Yellow
+    'rgba(253, 230, 138, ', // Light Butter Yellow
+    'rgba(251, 207, 232, ', // Soft Pastel Pink
+    'rgba(244, 166, 188, '  // Gentle Rose Pink
   ];
 
   function resize() {
@@ -79,23 +82,27 @@
 
   class Sparkle {
     constructor() {
-      this.reset();
+      this.reset(true); // Pass true to scatter across full screen on load
     }
 
-    reset() {
+    reset(isInitial = false) {
       this.x = Math.random() * width;
-      this.y = height + Math.random() * 100; // Start below screen
-      this.size = Math.random() * 6 + 2; // Sparkle radius/length
-      this.speedY = Math.random() * 0.4 + 0.1; // Slow upward float
-      this.speedX = (Math.random() - 0.5) * 0.2; // Gentle lateral drift
-      this.opacity = 0;
-      this.maxOpacity = Math.random() * 0.7 + 0.2;
-      this.fadeSpeed = Math.random() * 0.008 + 0.003;
-      this.fadeIn = true;
+      // Scatter vertically across screen on start, else spawn from bottom
+      this.y = isInitial ? Math.random() * height : height + Math.random() * 50;
+      this.size = Math.random() * 7 + 2.5; 
+      this.speedY = Math.random() * 0.4 + 0.15;
+      this.speedX = (Math.random() - 0.5) * 0.25;
+      
+      this.maxOpacity = Math.random() * 0.75 + 0.25;
+      // Start with visible opacity immediately so it doesn't take 5 seconds to show up
+      this.opacity = isInitial ? Math.random() * this.maxOpacity : 0;
+      this.fadeSpeed = Math.random() * 0.006 + 0.003;
+      this.fadeIn = !isInitial;
+      
       this.colorBase = colors[Math.floor(Math.random() * colors.length)];
-      this.isStar = Math.random() > 0.4; // 60% 4-point stars, 40% glowing dots
+      this.isStar = Math.random() > 0.35; // 65% 4-point stars, 35% dots
       this.rotation = Math.random() * Math.PI;
-      this.rotationSpeed = (Math.random() - 0.5) * 0.01;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.012;
     }
 
     update() {
@@ -103,7 +110,6 @@
       this.y -= this.speedY;
       this.rotation += this.rotationSpeed;
 
-      // Handle fade in and out
       if (this.fadeIn) {
         this.opacity += this.fadeSpeed;
         if (this.opacity >= this.maxOpacity) this.fadeIn = false;
@@ -111,9 +117,8 @@
         this.opacity -= this.fadeSpeed;
       }
 
-      // Reset when faded out or off screen
       if (this.opacity <= 0 || this.y < -20) {
-        this.reset();
+        this.reset(false);
       }
     }
 
@@ -124,7 +129,6 @@
       ctx.fillStyle = this.colorBase + this.opacity + ')';
 
       if (this.isStar) {
-        // Draw 4-pointed star
         ctx.beginPath();
         for (let i = 0; i < 4; i++) {
           ctx.rotate(Math.PI / 2);
@@ -133,7 +137,6 @@
         }
         ctx.fill();
       } else {
-        // Draw glowing circular dust dot
         ctx.beginPath();
         ctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
         ctx.fill();
@@ -143,26 +146,21 @@
     }
   }
 
-  // Populate particles density based on screen width
-  const particleCount = Math.floor(window.innerWidth / 25);
+  const particleCount = Math.floor(window.innerWidth / 20);
   for (let i = 0; i < particleCount; i++) {
-    const p = new Sparkle();
-    // Stagger initial starting Y position across the screen
-    p.y = Math.random() * height;
-    particles.push(p);
+    particles.push(new Sparkle());
   }
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-
     particles.forEach(p => {
       p.update();
       p.draw();
     });
-
     requestAnimationFrame(animate);
   }
 
   animate();
 </script>
-</body></html>
+</body>
+</html>
