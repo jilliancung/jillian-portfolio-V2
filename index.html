@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<!-- Canvas background element -->
+<!-- Sparkle Canvas Background Element -->
 <canvas id="sparkle-canvas"></canvas>
 
 <header>
@@ -120,12 +120,12 @@
 
   <section id="video" class="video-work">
     <div class="sectionhead">
-      <p>VIDEO &amp; SOCIAL</p>
+      <p>VIDEO & SOCIAL</p>
       <h2>Stories in motion.</h2>
     </div>
     <p class="section-intro">Selected short-form video content created for social media and digital storytelling.</p>
     <div class="video-grid">
-      <a class="video-card" href="https://www.instagram.com/reel/DXcnEkDDEGt/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer">
+      <a class="video-card" href="https://www.instagram.com/reel/DXcnEkDDEGt/?utm_source=ig_embed&utm_campaign=loading" target="_blank" rel="noopener noreferrer">
         <div class="video-preview"><span class="play-button">▶</span></div>
         <div class="video-info">
           <span>INSTAGRAM REEL</span>
@@ -134,7 +134,7 @@
           <strong>Watch on Instagram ↗</strong>
         </div>
       </a>
-      <a class="video-card" href="https://www.instagram.com/reel/DYNB8YCGtru/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer">
+      <a class="video-card" href="https://www.instagram.com/reel/DYNB8YCGtru/?utm_source=ig_embed&utm_campaign=loading" target="_blank" rel="noopener noreferrer">
         <div class="video-preview"><span class="play-button">▶</span></div>
         <div class="video-info">
           <span>INSTAGRAM REEL</span>
@@ -157,7 +157,7 @@
       <p>After discovering photojournalism in high school, I pursued a B.A. in Communications and Media Studies at the University of Calgary. Today, I bring that creative foundation to my work in communications, combining strategic thinking, content creation and community engagement to tell stories that are accessible, meaningful and audience-focused.</p>
       <p>When I’m not creating content, you can usually spot me in one of my many fun sweaters, from cats doing yoga to colourful mountain landscapes.</p>
       <div class="skills">
-        <span>Strategic communications</span><span>Writing &amp; editing</span><span>Content strategy</span><span>Digital communications</span><span>Stakeholder engagement</span><span>Events</span><span>Photography · Video &amp; multimedia</span>
+        <span>Strategic communications</span><span>Writing & editing</span><span>Content strategy</span><span>Digital communications</span><span>Stakeholder engagement</span><span>Events</span><span>Photography · Video & multimedia</span>
       </div>
     </div>
   </section>
@@ -175,22 +175,21 @@
   <span>Communications · Storytelling · Engagement</span>
 </footer>
 
-<script src="script.js"></script>
-
 <!-- Sparkle Animation Script -->
 <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
   const canvas = document.getElementById('sparkle-canvas');
   const ctx = canvas.getContext('2d');
 
   let width, height;
   let particles = [];
 
-  // Soft Pale Yellow & Pink Palette
   const colors = [
-    'rgba(254, 243, 199, ', // Soft Pale Yellow
-    'rgba(253, 230, 138, ', // Light Butter Yellow
-    'rgba(251, 207, 232, ', // Soft Pastel Pink
-    'rgba(244, 166, 188, '  // Gentle Rose Pink
+    'rgba(254, 243, 199, ', 
+    'rgba(253, 230, 138, ', 
+    'rgba(251, 207, 232, ', 
+    'rgba(244, 166, 188, '  
   ];
 
   function resize() {
