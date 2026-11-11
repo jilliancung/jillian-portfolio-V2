@@ -31,16 +31,16 @@ body {
   min-height: 100%;
 }
 
-/* --- Sparkle Canvas Background Rules --- */
+/* Sparkle Canvas Background Rules */
 #sparkle-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: block;        /* Fixes the inline vertical white gap at the bottom */
-  pointer-events: none;  /* Allows clicks to pass through to content */
-  z-index: 0;            /* Sits behind your content layer */
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: block;
+  pointer-events: none !important; /* Ensures clicks pass right through to your buttons/links */
+  z-index: 0 !important;            /* Keeps it behind your content */
 }
 
 /* Ensure your main layout layers stay safely above the background canvas */
