@@ -21,19 +21,8 @@ html {
   scroll-behavior: smooth;
 }
 
-/* --- Magical CSS Twinkling Background --- */
-body {
-  margin: 0;
-  background-color: #FAFAFC;
-  color: var(--ink);
-  font-family: "Nunito", sans-serif;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Big, glowing twinkling star field */
-body::before {
-  content: "";
+/* --- Star Field Background Container --- */
+.star-field {
   position: fixed;
   top: 0;
   left: 0;
@@ -41,34 +30,52 @@ body::before {
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  background-image: 
-    radial-gradient(3.5px 3.5px at 30px 40px, #ffbe0b, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 120px 180px, #ff7896, rgba(0,0,0,0)),
-    radial-gradient(3.5px 3.5px at 220px 90px, #a4b0f5, rgba(0,0,0,0)),
-    radial-gradient(4.5px 4.5px at 340px 280px, #ffbe0b, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 460px 150px, #b464f0, rgba(0,0,0,0)),
-    radial-gradient(3.5px 3.5px at 580px 320px, #ff7896, rgba(0,0,0,0)),
-    radial-gradient(4px 4px at 700px 70px, #5af0f0, rgba(0,0,0,0)),
-    radial-gradient(4.5px 4.5px at 820px 230px, #ffbe0b, rgba(0,0,0,0)),
-    radial-gradient(3.5px 3.5px at 940px 360px, #a4b0f5, rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 350px 350px;
-  animation: twinkle 3s ease-in-out infinite alternate;
-  opacity: 0.95;
+  overflow: hidden;
 }
 
-@keyframes twinkle {
+/* Individual Star Styling */
+.star {
+  position: absolute;
+  color: #FFD166; /* Warm golden star color */
+  font-size: 20px;
+  user-select: none;
+  animation: soft-twinkle 4s ease-in-out infinite alternate;
+}
+
+/* Use the actual sparkle/star character */
+.star::before {
+  content: "✦";
+}
+
+/* Randomize positions, sizes, colors, and animation delays for each star */
+.star:nth-child(1)  { top: 10%; left: 15%; font-size: 16px; color: #FFD166; animation-delay: 0s; }
+.star:nth-child(2)  { top: 25% ; left: 80%; font-size: 24px; color: #FF7896; animation-delay: 1.2s; }
+.star:nth-child(3)  { top: 40% ; left: 45%; font-size: 18px; color: #A4B0F5; animation-delay: 0.5s; }
+.star:nth-child(4)  { top: 60% ; left: 10%; font-size: 22px; color: #FFD166; animation-delay: 2.1s; }
+.star:nth-child(5)  { top: 75% ; left: 70%; font-size: 15px; color: #B464F0; animation-delay: 1.8s; }
+.star:nth-child(6)  { top: 15% ; left: 50%; font-size: 20px; color: #FF7896; animation-delay: 0.9s; }
+.star:nth-child(7)  { top: 85% ; left: 30%; font-size: 26px; color: #FFD166; animation-delay: 2.5s; }
+.star:nth-child(8)  { top: 50% ; left: 90%; font-size: 14px; color: #A4B0F5; animation-delay: 1.5s; }
+.star:nth-child(9)  { top: 30% ; left: 30%; font-size: 19px; color: #5AF0F0; animation-delay: 0.3s; }
+.star:nth-child(10) { top: 90% ; left: 85%; font-size: 22px; color: #FF7896; animation-delay: 2.8s; }
+
+/* Soft Twinkle Animation */
+@keyframes soft-twinkle {
   0% {
-    opacity: 0.4;
-    transform: scale(0.98);
+    opacity: 0.25;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.15) rotate(15deg);
   }
   100% {
-    opacity: 1;
-    transform: scale(1.02);
+    opacity: 0.25;
+    transform: scale(0.8) rotate(30deg);
   }
 }
 
-/* Ensure your site content layers safely above the background sparkles */
+/* Ensure your site content layers safely above the background */
 header, main, footer {
   max-width: 1180px;
   margin: auto;
