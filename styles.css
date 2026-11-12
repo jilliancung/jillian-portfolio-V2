@@ -1,3 +1,59 @@
+/* --- Pure CSS Twinkling Sparkles Background --- */
+body {
+  margin: 0;
+  background-color: #FAFAFC;
+  color: var(--ink);
+  font-family: "Nunito", sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Creates a magical twinkling star field across the entire page */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #ffbe0b, rgba(0,0,0,0)),
+    radial-gradient(2.5px 2.5px at 90px 140px, #ff7896, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 220px, #a4b0f5, rgba(0,0,0,0)),
+    radial-gradient(3px 3px at 250px 80px, #ffbe0b, rgba(0,0,0,0)),
+    radial-gradient(2px 2.5px at 350px 300px, #b464f0, rgba(0,0,0,0)),
+    radial-gradient(2.5px 2.5px at 450px 120px, #ff7896, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 550px 260px, #5af0f0, rgba(0,0,0,0)),
+    radial-gradient(3px 3px at 650px 50px, #ffbe0b, rgba(0,0,0,0)),
+    radial-gradient(2px 2.5px at 750px 190px, #a4b0f5, rgba(0,0,0,0)),
+    radial-gradient(2.5px 2.5px at 850px 320px, #ff7896, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+  opacity: 0.85;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Ensure your site content layers safely above the background */
+header, main, footer {
+  max-width: 1140px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
 :root {
   --ink: #392B58;
   --deep: #393A10;
